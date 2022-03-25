@@ -119,7 +119,7 @@ int main(int argc,char *argv[])
 				out << seats.c_str();
 				out.close();
 				system("timeout 1 >nul");
-				cout << "生成完毕！程序会在三秒后自动关闭。";
+				cout << endl << "生成完毕！程序会在三秒后自动关闭。";
 				system("timeout 3 >nul");
 				break;
 			}
