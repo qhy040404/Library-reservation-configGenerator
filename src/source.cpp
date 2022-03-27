@@ -89,13 +89,14 @@ int main(int argc,char *argv[])
 		system("timeout 1 >nul");
 		while (1)
 		{
-			cout << endl << "是否需要邮件提醒？需要请按y，不需要请按n";
+			cout << endl << "是否需要邮件提醒？需要请按y，不需要请按n：";
 			int ifMail;
 			ifMail = _getch();
+			cout << char(ifMail);
 			if (ifMail == 89 || ifMail == 121)
 			{
 				string mail_user, mail_pass;
-				cout << "邮件会从自己发送至自己" << endl;
+				cout << endl << endl << "邮件会从自己发送至自己" << endl;
 				cout << "请输入邮箱地址（目前只支持网易普邮及QQ邮箱）：";
 				cin >> mail_user;
 				cout << "请输入授权码（请在各邮箱smtp设置中获取授权码）：";
