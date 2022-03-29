@@ -38,19 +38,42 @@ int main(int argc,char *argv[])
 	}
 	else if (argc == 2)
 	{
+		initialize();
+		//初始化输出路径
 		char AppPath[MAX_PATH] = { 0 };
 		GetCurrentDirectoryA(MAX_PATH, AppPath);
 		string outPath = AppPath;
 		outPath += "\\config.conf";
-		string user_id, area_name, room_name;
+		//初始化变量
+		string user_id, area_name;
+		int room_name = 0;
 		string seats;
+		//初始化其他变量
+		const string validateLX("令希");
+		const string validateBC("伯川");
+		int val1 = rand(), val2 = rand();
+		int i = 0;
+		bool success = false;
+		//初始化输出流
 		ofstream out;
 		out.open(outPath.c_str());
 		out << "# 此文件为配置文件，请确认此文件存在于程序目录" << endl;
+		//main
 		cout << endl;
 		cout << "首先，请输入学号：";
-		cin >> user_id;
-		cout << "然后输入密码：";
+		while (1)
+		{
+			cin >> user_id;
+			if (user_id.size() == 9 || user_id.size() == 11)
+			{
+				break;
+			}
+			else
+			{
+				cout << endl << "学号位数好像不对哦，再输一次吧：";
+			}
+		}
+		cout << endl << "然后输入密码：";
 		char password[100];
 		int index = 0;
 		while (1)
@@ -77,13 +100,64 @@ int main(int argc,char *argv[])
 				password[index++] = ch;
 			}
 		}
-		cout << "输入你想去的图书馆（中文）：";
-		cin >> area_name;
-		cout << "想去哪个房间（不支持伯川3楼大厅，伯川电子阅览室，令希2楼）：";
-		cin >> room_name;
+		cout << endl << "输入你想去的图书馆（中文）：";
+		while (1)
+		{
+			cin >> area_name;
+			val1 = area_name.compare(validateLX);
+			val2 = area_name.compare(validateBC);
+			if (val1 == 0)
+			{
+				cout << endl << "想去哪个房间（不支持伯川3楼大厅，伯川电子阅览室，令希2楼）：";
+				while (success == false)
+				{
+					cin >> room_name;
+					int room_map[] = { 301,302,401,402,501,502,601,602 };
+					for (i = 0; room_map[i] > 0; i++)
+					{
+						if (room_name == room_map[i])
+						{
+							success = true;
+							break;
+						}
+					}
+					if (success == false)
+					{
+						cout << endl << "这个图书馆没有这个房间哦，请重新输入：";
+					}
+				}
+				break;
+			}
+			else if (val2 == 0)
+			{
+				cout << endl << "想去哪个房间（不支持伯川3楼大厅，伯川电子阅览室，令希2楼）：";
+				while (success == false)
+				{
+					cin >> room_name;
+					int room_map[] = { 301,312,401,404,409,501,504,507 };
+					for (i = 0; room_map[i] > 0; i++)
+					{
+						if (room_name == room_map[i])
+						{
+							success = true;
+							break;
+						}
+					}
+					if (success == false)
+					{
+						cout << endl << "这个图书馆没有这个房间哦，请重新输入：";
+					}
+				}
+				break;
+			}
+			else
+			{
+				cout << endl << "图书馆名字输错啦，请重新输入：";
+			}
+		}
 		cout << endl << "好的，基础信息设置完成" << endl;
 		system("timeout 1 >nul");
-		cout << endl << "接下来是期望座位（可连续输入，以空格隔开，不足3位的座位号需用0补足）：";
+		cout << endl << "接下来是期望座位（可连续输入，以-隔开，不足3位的座位号需用0补足）：";
 		cin >> seats;
 		cout << endl << "座位输入完毕" << endl;
 		system("timeout 1 >nul");
@@ -103,7 +177,7 @@ int main(int argc,char *argv[])
 				cin >> mail_pass;
 				system("cls");
 				cout << "所有数据输入完毕，正在生成配置文件，请稍后..." << endl;
-				out << user_id.c_str() << " " << password << " " << area_name.c_str() << " " << room_name.c_str() << endl;
+				out << user_id.c_str() << " " << password << " " << area_name.c_str() << " " << room_name << endl;
 				out << seats.c_str() << endl;
 				out << mail_user.c_str() << " " << mail_pass.c_str();
 				out.close();
@@ -116,7 +190,7 @@ int main(int argc,char *argv[])
 			{
 				system("cls");
 				cout << "所有数据输入完毕，正在生成配置文件，请稍后..." << endl;
-				out << user_id.c_str() << " " << password << " " << area_name.c_str() << " " << room_name.c_str() << endl;
+				out << user_id.c_str() << " " << password << " " << area_name.c_str() << " " << room_name << endl;
 				out << seats.c_str();
 				out.close();
 				system("timeout 1 >nul");
