@@ -34,7 +34,7 @@ int main(int argc,char *argv[])
 	{
 		ShowWindow(GetConsoleWindow(), SW_HIDE);
 		ManagerRun(argv[0], "2");
-		return 0;//return 1;
+		return 1;
 	}
 	else if (argc == 2)
 	{
