@@ -1,3 +1,4 @@
+//Using MBCS, not unicode.
 #include <iostream>
 #include <fstream>
 #include <string>
