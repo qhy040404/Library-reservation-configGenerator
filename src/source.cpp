@@ -201,22 +201,6 @@ int main(int argc,char *argv[])
 		}
 		system("timeout 1 >nul");
 		cout << "配置文件生成完毕！" << endl;
-		cout << "是否需要添加计划任务（明天早上6:30自动运行程序）？：(y/n)" << endl;
-		char ifJob;
-		ifJob = _getch();
-		if (ifJob == 'y')
-		{
-			string runPath = AppPath;
-			string exePath = AppPath;
-			runPath += "\\run.bat";
-			exePath += "\\main.exe";
-			ofstream run;
-			run.open(runPath.c_str());
-			run << "@echo off" << endl;
-			run << exePath.c_str();
-			run.close();
-			Jobadd();
-		}
 		cout << "程序将于三秒后关闭";
 		system("timeout 3 >nul");
 	}
