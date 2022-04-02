@@ -4,7 +4,7 @@
 #include <string>
 #include <Windows.h>
 #include <conio.h>
-#include "func1.h"
+//#include "func1.h"
 using namespace std;
 
 void ManagerRun(LPCSTR exe,LPCSTR param,INT nShow=SW_SHOW)
