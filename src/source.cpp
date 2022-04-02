@@ -4,6 +4,7 @@
 #include <string>
 #include <Windows.h>
 #include <conio.h>
+#include "func1.h"
 using namespace std;
 
 void ManagerRun(LPCSTR exe,LPCSTR param,INT nShow=SW_SHOW)
@@ -182,9 +183,6 @@ int main(int argc,char *argv[])
 				out << seats.c_str() << endl;
 				out << mail_user.c_str() << " " << mail_pass.c_str();
 				out.close();
-				system("timeout 1 >nul");
-				cout << "生成完毕！程序会在三秒后自动关闭。";
-				system("timeout 3 >nul");
 				break;
 			}
 			else if (ifMail == 78 || ifMail == 110)
@@ -194,9 +192,6 @@ int main(int argc,char *argv[])
 				out << user_id.c_str() << " " << password << " " << area_name.c_str() << " " << room_name << endl;
 				out << seats.c_str();
 				out.close();
-				system("timeout 1 >nul");
-				cout << endl << "生成完毕！程序会在三秒后自动关闭。";
-				system("timeout 3 >nul");
 				break;
 			}
 			else
@@ -204,6 +199,26 @@ int main(int argc,char *argv[])
 				cout << "输入错误" << endl;
 			}
 		}
+		system("timeout 1 >nul");
+		cout << "配置文件生成完毕！" << endl;
+		cout << "是否需要添加计划任务（明天早上6:30自动运行程序）？：(y/n)" << endl;
+		char ifJob;
+		ifJob = _getch();
+		if (ifJob == 'y')
+		{
+			string runPath = AppPath;
+			string exePath = AppPath;
+			runPath += "\\run.bat";
+			exePath += "\\main.exe";
+			ofstream run;
+			run.open(runPath.c_str());
+			run << "@echo off" << endl;
+			run << exePath.c_str();
+			run.close();
+			Jobadd();
+		}
+		cout << "程序将于三秒后关闭";
+		system("timeout 3 >nul");
 	}
 	return 0;
 }

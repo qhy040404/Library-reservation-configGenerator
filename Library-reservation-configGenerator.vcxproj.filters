@@ -18,9 +18,15 @@
     <ClCompile Include="src\source.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\func1.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\func1.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
