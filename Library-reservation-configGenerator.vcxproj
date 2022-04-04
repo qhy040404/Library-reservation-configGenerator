@@ -139,14 +139,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\check.cpp" />
     <ClCompile Include="src\func1.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="src\source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="header\check.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="src\func1.h">
+    <ClInclude Include="header\func1.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
   </ItemGroup>

@@ -1,0 +1,2 @@
+//check.h
+int checkIfExists();
