@@ -47,6 +47,14 @@ int main(int argc,char *argv[])
 		GetCurrentDirectoryA(MAX_PATH, AppPath);
 		string outPath = AppPath;
 		outPath += "\\config.conf";
+		string batPath = AppPath;
+		batPath += "\\run.bat";
+		//输出任务计划用bat
+		ofstream bat;
+		bat.open(batPath.c_str());
+		bat << "@echo off" << endl;
+		bat << "start /D \"" << AppPath << "\" main.exe" << endl;
+		bat.close();
 		//初始化变量
 		string user_id, area_name;
 		int room_name = 0;
@@ -206,6 +214,8 @@ int main(int argc,char *argv[])
 			user_count++;
 			while (1)
 			{
+				system("timeout 2 >nul");
+				cout << endl;
 				printf("当前已输入 %d 个用户数据\n", user_count);
 				cout << "是否继续？（y/n）";
 				int multiVal;
