@@ -33,4 +33,4 @@ jobs:
       - name: Compile
         run: |
             cd src
-            g++ -c *.cpp
+            g++ -o test.o check.cpp source.cpp
