@@ -85,7 +85,7 @@ int main(int argc,char *argv[])
 		//初始化其他变量
 		const string validateLX("令希");
 		const string validateBC("伯川");
-		int val1 = rand(), val2 = rand();
+		int val1, val2;
 		bool success = false;
 		bool multi = true;
 		int user_count = 0;
