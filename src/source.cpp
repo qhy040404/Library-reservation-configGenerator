@@ -5,7 +5,8 @@
 #include <Windows.h>
 #include <conio.h>
 #include <cstdio>
-//#include "func1.h"
+#include "../header/check.h"
+//#include "../header/func1.h"
 using namespace std;
 
 void ManagerRun(LPCSTR exe,LPCSTR param,INT nShow=SW_SHOW)
@@ -27,6 +28,7 @@ void ManagerRun(LPCSTR exe,LPCSTR param,INT nShow=SW_SHOW)
 
 void initialize()
 {
+	system("cls");
 	cout << "欢迎来到图书馆自动预约配置生成器" << endl;
 	cout << "配置完成后，配置文件会自动生成到程序根目录，不需要额外的复制操作" << endl;
 }
@@ -41,6 +43,27 @@ int main(int argc,char *argv[])
 	}
 	else if (argc == 2)
 	{
+		cout << "请稍后...";
+		system("timeout 1 >nul && cls");
+		//检测当前配置文件信息
+		if (checkIfExists() != 0)
+		{
+			printf("检测到现有配置文件中存在 %d 人数据，是否继续生成？（Y/N）", checkIfExists());
+			int init_choice;
+			init_choice = _getch();
+			cout << char(init_choice);
+			if (init_choice == 89 || init_choice == 121)
+			{
+				cout << endl << "正在初始化...";
+				cout << endl << "旧配置文件会被直接覆盖";
+				system("timeout 1 >nul");
+			}
+			else
+			{
+				exit(0);
+			}
+		}
+		//initialize
 		initialize();
 		//初始化输出路径
 		char AppPath[MAX_PATH] = { 0 };
@@ -63,7 +86,6 @@ int main(int argc,char *argv[])
 		const string validateLX("令希");
 		const string validateBC("伯川");
 		int val1 = rand(), val2 = rand();
-		int i = 0;
 		bool success = false;
 		bool multi = true;
 		int user_count = 0;
@@ -73,6 +95,7 @@ int main(int argc,char *argv[])
 		out << "# 此文件为配置文件，请确认此文件存在于程序目录" << endl;
 		while (multi == true)
 		{
+			user_count++;
 			//main
 			cout << endl;
 			cout << "首先，请输入学号：";
@@ -128,7 +151,7 @@ int main(int argc,char *argv[])
 					{
 						cin >> room_name;
 						int room_map[] = { 301,302,401,402,501,502,601,602 };
-						for (i = 0; room_map[i] > 0; i++)
+						for (int i = 0; room_map[i] > 0; i++)
 						{
 							if (room_name == room_map[i])
 							{
@@ -150,9 +173,9 @@ int main(int argc,char *argv[])
 					{
 						cin >> room_name;
 						int room_map[] = { 301,312,401,404,409,501,504,507 };
-						for (i = 0; room_map[i] > 0; i++)
+						for (int j = 0; room_map[j] > 0; j++)
 						{
-							if (room_name == room_map[i])
+							if (room_name == room_map[j])
 							{
 								success = true;
 								break;
@@ -192,6 +215,7 @@ int main(int argc,char *argv[])
 					cin >> mail_pass;
 					system("cls");
 					cout << "所有数据输入完毕，正在生成当前用户的配置文件，请稍后..." << endl;
+					out << "#" << user_count;
 					out << user_id.c_str() << " " << password << " " << area_name.c_str() << " " << room_name << endl;
 					out << seats.c_str() << endl;
 					out << mail_user.c_str() << " " << mail_pass.c_str();
@@ -201,6 +225,7 @@ int main(int argc,char *argv[])
 				{
 					system("cls");
 					cout << "所有数据输入完毕，正在生成当前用户的配置文件，请稍后..." << endl;
+					out << "#" << user_count;
 					out << user_id.c_str() << " " << password << " " << area_name.c_str() << " " << room_name << endl;
 					out << seats.c_str();
 					break;
@@ -211,7 +236,6 @@ int main(int argc,char *argv[])
 				}
 			}
 			// 是否多人
-			user_count++;
 			while (1)
 			{
 				system("timeout 2 >nul");
