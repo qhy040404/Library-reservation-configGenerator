@@ -46,7 +46,7 @@ int main(int argc,char *argv[])
 		cout << "请稍后...";
 		system("timeout 1 >nul && cls");
 		//检测当前配置文件信息
-		if (checkIfExists() != 0)
+		if (checkIfExists() > 0)
 		{
 			printf("检测到现有配置文件中存在 %d 人数据，是否继续生成？（Y/N）", checkIfExists());
 			int init_choice;
