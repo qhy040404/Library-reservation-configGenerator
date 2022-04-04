@@ -9,7 +9,7 @@
 //#include "../header/func1.h"
 using namespace std;
 
-void ManagerRun(LPCSTR exe,LPCSTR param,INT nShow=SW_SHOW)
+void ManagerRun(LPCSTR exe, LPCSTR param, INT nShow = SW_SHOW)
 {
 	SHELLEXECUTEINFO ShExecInfo;
 	ShExecInfo.cbSize = sizeof(SHELLEXECUTEINFO);
@@ -33,7 +33,7 @@ void initialize()
 	cout << "配置完成后，配置文件会自动生成到程序根目录，不需要额外的复制操作" << endl;
 }
 
-int main(int argc,char *argv[])
+int main(int argc, char* argv[])
 {
 	if (argc == 1)
 	{
@@ -215,7 +215,7 @@ int main(int argc,char *argv[])
 					cin >> mail_pass;
 					system("cls");
 					cout << "所有数据输入完毕，正在生成当前用户的配置文件，请稍后..." << endl;
-					out << "#" << user_count;
+					out << "#" << user_count << endl;
 					out << user_id.c_str() << " " << password << " " << area_name.c_str() << " " << room_name << endl;
 					out << seats.c_str() << endl;
 					out << mail_user.c_str() << " " << mail_pass.c_str();
@@ -225,7 +225,7 @@ int main(int argc,char *argv[])
 				{
 					system("cls");
 					cout << "所有数据输入完毕，正在生成当前用户的配置文件，请稍后..." << endl;
-					out << "#" << user_count;
+					out << "#" << user_count << endl;
 					out << user_id.c_str() << " " << password << " " << area_name.c_str() << " " << room_name << endl;
 					out << seats.c_str();
 					break;
