@@ -8,6 +8,27 @@ namespace ConfigGenerator
 {
     internal class GenerateFile
     {
+        public static bool DataAlreadyExists()
+        {
+            int linesCount = 0;
+            string line;
+            StreamReader sr = new StreamReader("config.conf");
+            line = sr.ReadLine();
+            while (line != null)
+            {
+                linesCount++;
+                line = sr.ReadLine();
+            }
+            sr.Close();
+            if (linesCount == 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
         public static void WriteBasicDataFirst(string user, string passwd, string area, string room)
         {
             FileStream fs = new FileStream("config.conf", FileMode.Create, FileAccess.Write);

@@ -71,6 +71,15 @@ namespace ConfigGenerator
         {
             if (textBox1.TextLength == 9 || textBox1.TextLength == 11)
             {
+                if (GenerateFile.DataAlreadyExists() == true && (!checkBox2.Checked || first_time == false))
+                {
+                    MessageBoxButtons ConfirmCover = MessageBoxButtons.YesNo;
+                    DialogResult dr = MessageBox.Show("检测到已存在的数据，是否覆盖？", "警告", ConfirmCover);
+                    if (dr == DialogResult.No)
+                    {
+                        return;
+                    }
+                }
                 if (!checkBox2.Checked)
                 {
                     GenerateFile.WriteBasicDataFirst(this.textBox1.Text, this.textBox2.Text, this.comboBox1.Text, this.comboBox2.Text);
