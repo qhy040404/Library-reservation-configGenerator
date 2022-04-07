@@ -1,0 +1,133 @@
+name: Publish
+
+on: [push, pull_request]
+
+env:
+  CONFIGURATION: Release
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_NOLOGO: true
+  DOTNET_SDK_VERSION: 6.0.x
+  NET_CORE_VERSION: net6.0
+
+jobs:
+  publish:
+    strategy:
+      fail-fast: false
+
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3.0.0
+      with:
+        submodules: recursive
+
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.3
+
+    - name: Verify MSBuild
+      run: msbuild -version
+    
+    - name: Restore NuGet Packages
+      shell: pwsh
+      run: |
+        Set-StrictMode -Version Latest
+        
+        nuget restore
+
+    - name: Publish ConfigGenerator on Windows
+      shell: pwsh
+      run: |
+        Set-StrictMode -Version Latest
+        $ErrorActionPreference = 'Stop'
+        $ProgressPreference = 'SilentlyContinue'
+        
+        msbuild -t:Build -p:Configuration=Release -p:OutDir="out\" -nologo
+    
+    - name: Create zip file on Windows
+      shell: pwsh
+      run: |
+        # By default use fastest compression
+        $compressionArgs = '-mx=1'
+
+        # Include extra logic for builds marked for release
+        if ($env:GITHUB_REF -like 'refs/tags/*') {
+            # Tweak compression args for release publishing
+            $compressionArgs = '-mx=9', '-mfb=258', '-mpass=15'
+        }
+
+        7z a -bd -slp -tzip -mm=Deflate $compressionArgs "out\ConfigGenerator.zip" "$env:GITHUB_WORKSPACE\out\*"
+
+        if ($LastExitCode -ne 0) {
+            throw "Last command failed."
+        }
+    
+    - name: Upload Library-win
+      continue-on-error: true
+      uses: actions/upload-artifact@v3.0.0
+      with:
+        name: Package
+        path: out/ConfigGenerator.zip
+
+  release:
+    if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') }}
+    needs: publish
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3.0.0
+
+    - name: Download package from windows-latest
+      uses: actions/download-artifact@v3.0.0
+      with:
+        name: Package
+        path: upload
+
+    - name: Generate SHA-512 checksums
+      shell: sh
+      run: |
+        set -eu
+
+        (
+            cd "upload"
+
+            sha512sum *.zip > SHA512SUMS
+        )
+
+    - name: Upload SHA512SUMS
+      continue-on-error: true
+      uses: actions/upload-artifact@v3.0.0
+      with:
+        name: SHA512SUMS
+        path: upload/SHA512SUMS
+
+    - name: Create Library GitHub release
+      id: github_release
+      uses: actions/create-release@v1.1.4
+      env:
+        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: v${{ github.ref }}
+        prerelease: true
+
+    - name: Upload Package to GitHub release
+      uses: actions/upload-release-asset@v1.0.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.github_release.outputs.upload_url }}
+        asset_path: upload/ConfigGenerator.zip
+        asset_name: Library-win.zip
+        asset_content_type: application/zip
+
+    - name: Upload SHA512SUMS to GitHub release
+      uses: actions/upload-release-asset@v1.0.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.github_release.outputs.upload_url }}
+        asset_path: upload/SHA512SUMS
+        asset_name: SHA512SUMS
+        asset_content_type: text/plain
