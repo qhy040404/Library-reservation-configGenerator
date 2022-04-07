@@ -11,12 +11,14 @@ namespace ConfigGenerator
 
         int count = 1;
         bool first_time = false;
+        string area;
 
         private void Form1_Load(object sender, EventArgs e)
         {
             comboBox1.Items.Add("¡Óœ£");
             comboBox1.Items.Add("≤Æ¥®");
             comboBox2.Items.Add("«Îœ»—°‘ÒÕº Èπ›");
+            comboBox2.SelectedIndex = 0;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -32,6 +34,7 @@ namespace ConfigGenerator
                 comboBox2.Items.Add("502");
                 comboBox2.Items.Add("601");
                 comboBox2.Items.Add("602");
+                area = "LX";
             }
             else if (comboBox1.Text == "≤Æ¥®")
             {
@@ -43,6 +46,7 @@ namespace ConfigGenerator
                 comboBox2.Items.Add("501");
                 comboBox2.Items.Add("504");
                 comboBox2.Items.Add("507");
+                area = "BC";
             }
         }
 
@@ -82,7 +86,7 @@ namespace ConfigGenerator
                 }
                 if (!checkBox2.Checked)
                 {
-                    GenerateFile.WriteBasicDataFirst(this.textBox1.Text, this.textBox2.Text, this.comboBox1.Text, this.comboBox2.Text);
+                    GenerateFile.WriteBasicDataFirst(this.textBox1.Text, this.textBox2.Text, area, this.comboBox2.Text);
                     GenerateFile.WriteSeatsData(this.textBox5.Text);
                     if (checkBox1.Checked)
                     {
@@ -94,7 +98,7 @@ namespace ConfigGenerator
                 {
                     if (first_time == false)
                     {
-                        GenerateFile.WriteBasicDataFirst(this.textBox1.Text, this.textBox2.Text, this.comboBox1.Text, this.comboBox2.Text);
+                        GenerateFile.WriteBasicDataFirst(this.textBox1.Text, this.textBox2.Text, area, this.comboBox2.Text);
                         GenerateFile.WriteSeatsData(this.textBox5.Text);
                         if (checkBox1.Checked)
                         {
@@ -104,7 +108,7 @@ namespace ConfigGenerator
                     }
                     else
                     {
-                        GenerateFile.WriteBasicData(this.textBox1.Text, this.textBox2.Text, this.comboBox1.Text, this.comboBox2.Text, count);
+                        GenerateFile.WriteBasicData(this.textBox1.Text, this.textBox2.Text, area, this.comboBox2.Text, count);
                         GenerateFile.WriteSeatsData(this.textBox5.Text);
                         if (checkBox1.Checked)
                         {
@@ -121,6 +125,7 @@ namespace ConfigGenerator
                     textBox4.Text = "";
                     textBox5.Text = "";
                     comboBox1.SelectedIndex = -1;
+                    comboBox2.Items.Clear();
                     comboBox2.SelectedIndex = -1;
                     checkBox1.Checked = false;
                 }

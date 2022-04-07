@@ -34,7 +34,7 @@ namespace ConfigGenerator
             FileStream fs = new FileStream("config.conf", FileMode.Create, FileAccess.Write);
             TextWriter tw = new StreamWriter(fs, Encoding.Default);
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("# 此文件为配置文件，请确认此文件存在于程序目录");
+            sb.AppendLine("# config.conf DO NOT DELETE!");
             sb.AppendLine("# 1");
             string row = user + " " + passwd + " " + area + " " + room;
             sb.AppendLine(row);
