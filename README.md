@@ -14,3 +14,6 @@ Main project here [qhy040404/DLUT-library-auto-reservation](https://github.com/q
 ## 2rd Generation
 - 加入图形化界面
 - 从C++转换到C#（第一次写C#，感觉挺好）
+
+## 最低运行系统
+Windows 7
