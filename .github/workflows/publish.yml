@@ -119,7 +119,7 @@ jobs:
       with:
         upload_url: ${{ steps.github_release.outputs.upload_url }}
         asset_path: upload/ConfigGenerator.zip
-        asset_name: Library-win.zip
+        asset_name: ConfigGenerator.zip
         asset_content_type: application/zip
 
     - name: Upload SHA512SUMS to GitHub release
