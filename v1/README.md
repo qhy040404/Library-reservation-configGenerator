@@ -1,3 +1,4 @@
+- Archived
 # 图书馆小程序配置生成器
 
 [![Build status (GitHub)](https://img.shields.io/github/workflow/status/qhy040404/Library-reservation-configGenerator/Compile-CI/master?label=Compile&logo=github&cacheSeconds=600)](https://github.com/qhy040404/Library-reservation-configGenerator/actions)
