@@ -11,6 +11,8 @@
 
 Main project here [qhy040404/DLUT-library-auto-reservation](https://github.com/qhy040404/DLUT-library-auto-reservation)
 
+# 请注意，配置生成器仅用于Windows
+
 ## 2rd Generation
 - 加入图形化界面
 - 从C++转换到C#（第一次写C#，感觉挺好）
