@@ -19,6 +19,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="obj\**" />
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="obj\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="obj\**" />
+    <None Remove="Properties\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="icon\icon.ico" />
   </ItemGroup>
 
@@ -40,11 +49,6 @@
 
   <ItemGroup>
     <Resource Include="icon\icon.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="obj\Release\net6.0-windows\" />
-    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>
