@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>icon\icon.ico</ApplicationIcon>
+    <PackageId>配置生成器</PackageId>
+    <Authors>qhy040404</Authors>
+    <Version>2.0.0.0</Version>
+    <Copyright>Copyright (C) 2022 qhy040404 All Rights Reserved</Copyright>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
+    <Product>大连理工大学图书馆自动预约座位小程序</Product>
+    <AssemblyName>ConfigGenerator</AssemblyName>
+    <RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="icon\icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <COMReference Include="TaskScheduler">
+      <VersionMinor>0</VersionMinor>
+      <VersionMajor>1</VersionMajor>
+      <Guid>e34cb9f1-c7f7-424c-be29-027dcc09363a</Guid>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>false</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="icon\icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="icon\icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="obj\Release\net6.0-windows\" />
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+</Project>
