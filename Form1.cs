@@ -11,7 +11,7 @@ namespace ConfigGenerator
 
         int count = 1;
         bool first_time = false;
-        string area;
+        string area = "";
 
         private void Form1_Load(object sender, EventArgs e)
         {
