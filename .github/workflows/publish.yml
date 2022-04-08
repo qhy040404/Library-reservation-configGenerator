@@ -11,7 +11,12 @@ env:
 
 jobs:
   publish:
-    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
 
     steps:
     - name: Checkout code
@@ -20,19 +25,43 @@ jobs:
         submodules: recursive
 
     - name: Add MSBuild to PATH
+      if: startsWith(matrix.os, 'windows-')
       uses: microsoft/setup-msbuild@v1.0.3
 
     - name: Verify MSBuild
+      if: startsWith(matrix.os, 'windows-')
       run: msbuild -version
 
+    - name: Verify g++ on Linux
+      if: startsWith(matrix.os, 'ubuntu-')
+      shell: sh
+      run: g++ --version
+
+    - name: Verify g++ on macOS
+      if: startsWith(matrix.os, 'macos-')
+      shell: sh
+      run: g++-9 --version
+
     - name: Restore NuGet Packages
+      if: startsWith(matrix.os, 'windows-')
       shell: pwsh
       run: |
         Set-StrictMode -Version Latest
 
         nuget restore
 
+    - name: Publish ConfigGenerator on Linux
+      if: startsWith(matrix.os, 'ubuntu-')
+      shell: sh
+      run: g++ -o out/ConfigGenerator Unix-version/src/source.cpp
+
+    - name: Publish ConfigGenerator on macOS
+      if: startsWith(matrix.os, 'macos-')
+      shell: sh
+      run: g++-9 -o out/ConfigGenerator Unix-version/src/source.cpp
+
     - name: Publish ConfigGenerator on Windows
+      if: startsWith(matrix.os, 'windows-')
       shell: pwsh
       run: |
         Set-StrictMode -Version Latest
@@ -41,7 +70,96 @@ jobs:
 
         msbuild -t:Build -p:Configuration=Release -p:OutDir="out\" -nologo
 
+    - name: Create zip file on Linux
+      if: startsWith(matrix.os, 'ubuntu-')
+      shell: sh
+      run: |
+        # By default use fastest compression
+        seven_zip_args="-mx=1"
+        zip_args="-1"
+        # Include extra logic for builds marked for release
+        case "$GITHUB_REF" in
+            "refs/tags/"*)
+                # Tweak compression args for release publishing
+                seven_zip_args="-mx=9 -mfb=258 -mpass=15"
+                zip_args="-9"
+        esac
+        case "$(uname -s)" in
+            "Darwin")
+                # We prefer to use zip on OS X as 7z implementation on that OS doesn't handle file permissions (chmod +x)
+                if command -v zip >/dev/null; then
+                    (
+                        cd "${GITHUB_WORKSPACE}/out"
+                        zip -q -r $zip_args "../ConfigGenerator-linux.zip" .
+                    )
+                elif command -v 7z >/dev/null; then
+                    7z a -bd -slp -tzip -mm=Deflate $seven_zip_args "out/ConfigGenerator-linux.zip" "${GITHUB_WORKSPACE}/out/*"
+                else
+                    echo "ERROR: No supported zip tool!"
+                    return 1
+                fi
+                ;;
+            *)
+                if command -v 7z >/dev/null; then
+                    7z a -bd -slp -tzip -mm=Deflate $seven_zip_args "out/ConfigGenerator-linux.zip" "${GITHUB_WORKSPACE}/out/*"
+                elif command -v zip >/dev/null; then
+                    (
+                        cd "${GITHUB_WORKSPACE}/out"
+                        zip -q -r $zip_args "../ConfigGenerator-linux.zip" .
+                    )
+                else
+                    echo "ERROR: No supported zip tool!"
+                    return 1
+                fi
+                ;;
+        esac
+
+    - name: Create zip file on macOS
+      if: startsWith(matrix.os, 'macos-')
+      shell: sh
+      run: |
+        # By default use fastest compression
+        seven_zip_args="-mx=1"
+        zip_args="-1"
+        # Include extra logic for builds marked for release
+        case "$GITHUB_REF" in
+            "refs/tags/"*)
+                # Tweak compression args for release publishing
+                seven_zip_args="-mx=9 -mfb=258 -mpass=15"
+                zip_args="-9"
+        esac
+        case "$(uname -s)" in
+            "Darwin")
+                # We prefer to use zip on OS X as 7z implementation on that OS doesn't handle file permissions (chmod +x)
+                if command -v zip >/dev/null; then
+                    (
+                        cd "${GITHUB_WORKSPACE}/out"
+                        zip -q -r $zip_args "../ConfigGenerator-osx.zip" .
+                    )
+                elif command -v 7z >/dev/null; then
+                    7z a -bd -slp -tzip -mm=Deflate $seven_zip_args "out/ConfigGenerator-osx.zip" "${GITHUB_WORKSPACE}/out/*"
+                else
+                    echo "ERROR: No supported zip tool!"
+                    return 1
+                fi
+                ;;
+            *)
+                if command -v 7z >/dev/null; then
+                    7z a -bd -slp -tzip -mm=Deflate $seven_zip_args "out/ConfigGenerator-osx.zip" "${GITHUB_WORKSPACE}/out/*"
+                elif command -v zip >/dev/null; then
+                    (
+                        cd "${GITHUB_WORKSPACE}/out"
+                        zip -q -r $zip_args "../ConfigGenerator-osx.zip" .
+                    )
+                else
+                    echo "ERROR: No supported zip tool!"
+                    return 1
+                fi
+                ;;
+        esac
+
     - name: Create zip file on Windows
+      if: startsWith(matrix.os, 'windows-')
       shell: pwsh
       run: |
         # By default use fastest compression
@@ -59,11 +177,28 @@ jobs:
             throw "Last command failed."
         }
 
-    - name: Upload Library-win
+    - name: Upload ConfigGenerator-linux
+      if: startsWith(matrix.os, 'ubuntu-')
       continue-on-error: true
       uses: actions/upload-artifact@v3.0.0
       with:
-        name: Package
+        name: Package-ubuntu
+        path: out/ConfigGenerator-linux.zip
+
+    - name: Upload ConfigGenerator-osx
+      if: startsWith(matrix.os, 'macos-')
+      continue-on-error: true
+      uses: actions/upload-artifact@v3.0.0
+      with:
+        name: Package-macos
+        path: out/ConfigGenerator-osx.zip
+
+    - name: Upload ConfigGenerator-win
+      if: startsWith(matrix.os, 'windows-')
+      continue-on-error: true
+      uses: actions/upload-artifact@v3.0.0
+      with:
+        name: Package-windows
         path: out/ConfigGenerator-win.zip
 
   release:
@@ -75,10 +210,22 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3.0.0
 
+    - name: Download package from ubuntu-latest
+      uses: actions/download-artifact@v3.0.0
+      with:
+        name: Package-ubuntu
+        path: upload
+
+    - name: Download package from macos-latest
+      uses: actions/download-artifact@v3.0.0
+      with:
+        name: Package-macos
+        path: upload
+
     - name: Download package from windows-latest
       uses: actions/download-artifact@v3.0.0
       with:
-        name: Package
+        name: Package-windows
         path: upload
 
     - name: Generate SHA-512 checksums
@@ -109,7 +256,27 @@ jobs:
         release_name: v${{ github.ref }}
         prerelease: true
 
-    - name: Upload Package to GitHub release
+    - name: Upload Package-ubuntu to GitHub release
+      uses: actions/upload-release-asset@v1.0.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.github_release.outputs.upload_url }}
+        asset_path: upload/ConfigGenerator-linux.zip
+        asset_name: ConfigGenerator-linux.zip
+        asset_content_type: application/zip
+
+    - name: Upload Package-macos to GitHub release
+      uses: actions/upload-release-asset@v1.0.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.github_release.outputs.upload_url }}
+        asset_path: upload/ConfigGenerator-osx.zip
+        asset_name: ConfigGenerator-osx.zip
+        asset_content_type: application/zip
+
+    - name: Upload Package-windows to GitHub release
       uses: actions/upload-release-asset@v1.0.2
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
