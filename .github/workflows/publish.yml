@@ -55,6 +55,7 @@ jobs:
       shell: sh
       run: |
         g++ -o ConfigGenerator Unix-version/src/source.cpp
+        mkdir out
         cp "ConfigGenerator" "out/"
 
     - name: Publish ConfigGenerator on macOS
@@ -62,6 +63,7 @@ jobs:
       shell: sh
       run: |
         g++-9 -o ConfigGenerator Unix-version/src/source.cpp
+        mkdir out
         cp "ConfigGenerator" "out/"
 
     - name: Publish ConfigGenerator on Windows
