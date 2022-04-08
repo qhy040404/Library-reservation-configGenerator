@@ -1,4 +1,4 @@
-﻿namespace ConfigGenerator
+namespace ConfigGenerator
 {
     partial class Form1
     {

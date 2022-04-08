@@ -16,7 +16,7 @@ namespace ConfigGenerator
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBox2.Items.Clear();
-            if (comboBox1.Text == "ÁîÏ£")
+            if (comboBox1.SelectedIndex == 0)
             {
                 comboBox2.Items.Add("301");
                 comboBox2.Items.Add("302");
@@ -28,7 +28,7 @@ namespace ConfigGenerator
                 comboBox2.Items.Add("602");
                 area = "LX";
             }
-            else if (comboBox1.Text == "²®´¨")
+            else if (comboBox1.SelectedIndex == 1)
             {
                 comboBox2.Items.Add("301");
                 comboBox2.Items.Add("312");
@@ -70,7 +70,7 @@ namespace ConfigGenerator
                 if (GenerateFile.DataAlreadyExists() == true && (!checkBox2.Checked || first_time == false))
                 {
                     MessageBoxButtons ConfirmCover = MessageBoxButtons.YesNo;
-                    DialogResult dr = MessageBox.Show("¼ì²âµ½ÒÑ´æÔÚµÄÊı¾İ£¬ÊÇ·ñ¸²¸Ç£¿", "¾¯¸æ", ConfirmCover);
+                    DialogResult dr = MessageBox.Show("æ£€æµ‹åˆ°å·²å­˜åœ¨çš„æ•°æ®ï¼Œæ˜¯å¦è¦†ç›–ï¼Ÿ", "è­¦å‘Š", ConfirmCover);
                     if (dr == DialogResult.No)
                     {
                         return;
@@ -124,11 +124,11 @@ namespace ConfigGenerator
             }
             else if (textBox2.Text == "" || comboBox1.SelectedIndex == -1 || comboBox2.SelectedIndex == -1 || textBox5.Text == "")
             {
-                MessageBox.Show("±ØÒªÏîÎª¿Õ", "´íÎó");
+                MessageBox.Show("å¿…è¦é¡¹ä¸ºç©º", "é”™è¯¯");
             }
             else
             {
-                MessageBox.Show("Ñ§ºÅ³¤¶È´íÎó", "´íÎó");
+                MessageBox.Show("å­¦å·é•¿åº¦é”™è¯¯", "é”™è¯¯");
             }
         }
 
@@ -140,7 +140,7 @@ namespace ConfigGenerator
                 label12.Text = "# " + count;
                 label13.Visible = true;
                 listBox1.Visible = true;
-                listBox1.Items.Add("±àºÅ   Ñ§ºÅ");
+                listBox1.Items.Add("ç¼–å·   å­¦å·");
             }
             else
             {
@@ -152,16 +152,16 @@ namespace ConfigGenerator
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //´´½¨Õß
+            //åˆ›å»ºè€…
             var creator = "Library";
-            //¼Æ»®ÈÎÎñÃû³Æ
+            //è®¡åˆ’ä»»åŠ¡åç§°
             var taskName = "Library";
-            //Ö´ĞĞµÄ³ÌĞòÂ·¾¶
+            //æ‰§è¡Œçš„ç¨‹åºè·¯å¾„
             var CurrentPath = System.Windows.Forms.Application.StartupPath;
             var path = CurrentPath + "main.exe";
-            //¼Æ»®ÈÎÎñÖ´ĞĞµÄÆµÂÊ PT1MÒ»·ÖÖÓ  PT1H30M 90·ÖÖÓ
+            //è®¡åˆ’ä»»åŠ¡æ‰§è¡Œçš„é¢‘ç‡ PT1Mä¸€åˆ†é’Ÿ  PT1H30M 90åˆ†é’Ÿ
             var interval = "PT24H";
-            //¿ªÊ¼Ê±¼ä Çë×ñÑ­ yyyy-MM-ddTHH:mm:ss ¸ñÊ½
+            //å¼€å§‹æ—¶é—´ è¯·éµå¾ª yyyy-MM-ddTHH:mm:ss æ ¼å¼
             DateTime dt = DateTime.Now;
             dt.AddDays(1);
             string day = dt.ToString("yyyy-MM-dd");
@@ -170,7 +170,7 @@ namespace ConfigGenerator
             _TASK_STATE state = SchTaskExt.CreateTaskScheduler(creator, taskName, path, CurrentPath, interval, startBoundary, description);
             if (state == _TASK_STATE.TASK_STATE_READY)
             {
-                MessageBox.Show("¼Æ»®ÈÎÎñ²¿Êğ³É¹¦!", "ÌáÊ¾");
+                MessageBox.Show("è®¡åˆ’ä»»åŠ¡éƒ¨ç½²æˆåŠŸ!", "æç¤º");
             }
         }
 
@@ -179,7 +179,7 @@ namespace ConfigGenerator
             var taskName = "Library";
             if (!SchTaskExt.IsExists(taskName))
             {
-                MessageBox.Show("¼Æ»®ÈÎÎñ²»´æÔÚ", "´íÎó");
+                MessageBox.Show("è®¡åˆ’ä»»åŠ¡ä¸å­˜åœ¨", "é”™è¯¯");
                 return;
             }
             else
@@ -189,7 +189,7 @@ namespace ConfigGenerator
             //Confirm
             if (!SchTaskExt.IsExists(taskName))
             {
-                MessageBox.Show("¼Æ»®ÈÎÎñÉ¾³ı³É¹¦", "ÌáÊ¾");
+                MessageBox.Show("è®¡åˆ’ä»»åŠ¡åˆ é™¤æˆåŠŸ", "æç¤º");
             }
         }
     }
