@@ -1,4 +1,4 @@
-﻿namespace ConfigGenerator
+namespace ConfigGenerator
 {
     partial class Form1
     {
@@ -138,6 +138,9 @@
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "令希",
+            "伯川"});
             this.comboBox1.Location = new System.Drawing.Point(189, 183);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(152, 25);
@@ -383,7 +386,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "ConfigGenerator";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
