@@ -53,12 +53,16 @@ jobs:
     - name: Publish ConfigGenerator on Linux
       if: startsWith(matrix.os, 'ubuntu-')
       shell: sh
-      run: g++ -o out/ConfigGenerator Unix-version/src/source.cpp
+      run: |
+        g++ -o ConfigGenerator Unix-version/src/source.cpp
+        cp "ConfigGenerator" "out/"
 
     - name: Publish ConfigGenerator on macOS
       if: startsWith(matrix.os, 'macos-')
       shell: sh
-      run: g++-9 -o out/ConfigGenerator Unix-version/src/source.cpp
+      run: |
+        g++-9 -o ConfigGenerator Unix-version/src/source.cpp
+        cp "ConfigGenerator" "out/"
 
     - name: Publish ConfigGenerator on Windows
       if: startsWith(matrix.os, 'windows-')
