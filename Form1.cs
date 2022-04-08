@@ -18,6 +18,8 @@ namespace ConfigGenerator
             comboBox2.Items.Clear();
             if (comboBox1.SelectedIndex == 0)
             {
+                comboBox2.Items.Add("201");
+                comboBox2.Items.Add("202");
                 comboBox2.Items.Add("301");
                 comboBox2.Items.Add("302");
                 comboBox2.Items.Add("401");
