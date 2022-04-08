@@ -1,4 +1,4 @@
-# Í¼Êé¹İĞ¡³ÌĞòÅäÖÃÉú³ÉÆ÷
+# å›¾ä¹¦é¦†å°ç¨‹åºé…ç½®ç”Ÿæˆå™¨
 
 [![Build status (GitHub)](https://img.shields.io/github/workflow/status/qhy040404/Library-reservation-configGenerator/Compile-CI/master?label=Compile&logo=github&cacheSeconds=600)](https://github.com/qhy040404/Library-reservation-configGenerator/actions)
 [![CodeFactor](https://www.codefactor.io/repository/github/qhy040404/library-reservation-configgenerator/badge)](https://www.codefactor.io/repository/github/qhy040404/library-reservation-configgenerator)
@@ -7,15 +7,15 @@
 
 ![GitHub top language](https://img.shields.io/github/languages/top/qhy040404/Library-reservation-configGenerator)
 
-Ö÷ÏîÄ¿ÔÚ´Ë [qhy040404/DLUT-library-auto-reservation](https://github.com/qhy040404/DLUT-library-auto-reservation)
+ä¸»é¡¹ç›®åœ¨æ­¤ [qhy040404/DLUT-library-auto-reservation](https://github.com/qhy040404/DLUT-library-auto-reservation)
 
 Main project here [qhy040404/DLUT-library-auto-reservation](https://github.com/qhy040404/DLUT-library-auto-reservation)
 
-# Çë×¢Òâ£¬ÅäÖÃÉú³ÉÆ÷½öÓÃÓÚWindows
+# è¯·æ³¨æ„ï¼Œé…ç½®ç”Ÿæˆå™¨ä»…ç”¨äºWindows
 
 ## 2rd Generation
-- ¼ÓÈëÍ¼ĞÎ»¯½çÃæ
-- ´ÓC++×ª»»µ½C#£¨µÚÒ»´ÎĞ´C#£¬¸Ğ¾õÍ¦ºÃ£©
+- åŠ å…¥å›¾å½¢åŒ–ç•Œé¢
+- ä»C++è½¬æ¢åˆ°C#ï¼ˆç¬¬ä¸€æ¬¡å†™C#ï¼Œæ„Ÿè§‰æŒºå¥½ï¼‰
 
-## ×îµÍÔËĞĞÏµÍ³
+## æœ€ä½è¿è¡Œç³»ç»Ÿ
 Windows 7
