@@ -13,14 +13,6 @@ namespace ConfigGenerator
         bool first_time = false;
         string area = "";
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            comboBox1.Items.Add("¡Óœ£");
-            comboBox1.Items.Add("≤Æ¥®");
-            comboBox2.Items.Add("«Îœ»—°‘ÒÕº Èπ›");
-            comboBox2.SelectedIndex = 0;
-        }
-
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBox2.Items.Clear();
