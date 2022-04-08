@@ -9,10 +9,10 @@
     <ApplicationIcon>icon\icon.ico</ApplicationIcon>
     <PackageId>配置生成器</PackageId>
     <Authors>qhy040404</Authors>
-    <Version>2.0.0.6</Version>
+    <Version>2.0.0.5</Version>
     <Copyright>Copyright (C) 2022 qhy040404 All Rights Reserved</Copyright>
-    <AssemblyVersion>2.0.0.6</AssemblyVersion>
-    <FileVersion>2.0.0.6</FileVersion>
+    <AssemblyVersion>2.0.0.5</AssemblyVersion>
+    <FileVersion>2.0.0.5</FileVersion>
     <Product>大连理工大学图书馆自动预约座位小程序</Product>
     <AssemblyName>ConfigGenerator</AssemblyName>
     <RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
