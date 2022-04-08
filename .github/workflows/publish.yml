@@ -53,7 +53,7 @@ jobs:
             $compressionArgs = '-mx=9', '-mfb=258', '-mpass=15'
         }
 
-        7z a -bd -slp -tzip -mm=Deflate $compressionArgs "out\ConfigGenerator.zip" "$env:GITHUB_WORKSPACE\out\*"
+        7z a -bd -slp -tzip -mm=Deflate $compressionArgs "out\ConfigGenerator-win.zip" "$env:GITHUB_WORKSPACE\out\*"
 
         if ($LastExitCode -ne 0) {
             throw "Last command failed."
@@ -64,7 +64,7 @@ jobs:
       uses: actions/upload-artifact@v3.0.0
       with:
         name: Package
-        path: out/ConfigGenerator.zip
+        path: out/ConfigGenerator-win.zip
 
   release:
     if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') }}
@@ -115,8 +115,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.github_release.outputs.upload_url }}
-        asset_path: upload/ConfigGenerator.zip
-        asset_name: ConfigGenerator.zip
+        asset_path: upload/ConfigGenerator-win.zip
+        asset_name: ConfigGenerator-win.zip
         asset_content_type: application/zip
 
     - name: Upload SHA512SUMS to GitHub release
