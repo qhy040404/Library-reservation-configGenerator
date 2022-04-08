@@ -11,9 +11,6 @@ env:
 
 jobs:
   publish:
-    strategy:
-      fail-fast: false
-
     runs-on: windows-latest
 
     steps:
@@ -27,12 +24,12 @@ jobs:
 
     - name: Verify MSBuild
       run: msbuild -version
-    
+
     - name: Restore NuGet Packages
       shell: pwsh
       run: |
         Set-StrictMode -Version Latest
-        
+
         nuget restore
 
     - name: Publish ConfigGenerator on Windows
@@ -41,9 +38,9 @@ jobs:
         Set-StrictMode -Version Latest
         $ErrorActionPreference = 'Stop'
         $ProgressPreference = 'SilentlyContinue'
-        
+
         msbuild -t:Build -p:Configuration=Release -p:OutDir="out\" -nologo
-    
+
     - name: Create zip file on Windows
       shell: pwsh
       run: |
@@ -61,7 +58,7 @@ jobs:
         if ($LastExitCode -ne 0) {
             throw "Last command failed."
         }
-    
+
     - name: Upload Library-win
       continue-on-error: true
       uses: actions/upload-artifact@v3.0.0
