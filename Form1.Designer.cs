@@ -53,7 +53,6 @@ namespace ConfigGenerator
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -295,17 +294,6 @@ namespace ConfigGenerator
             this.label13.Text = "多人预约模式已启用，学号上方可查看当前用户编号";
             this.label13.Visible = false;
             // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("等线", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label14.Location = new System.Drawing.Point(564, 391);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(98, 23);
-            this.label14.TabIndex = 24;
-            this.label14.Text = "生成完毕";
-            this.label14.Visible = false;
-            // 
             // label15
             // 
             this.label15.AutoSize = true;
@@ -358,7 +346,6 @@ namespace ConfigGenerator
             this.Controls.Add(this.button2);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.label15);
-            this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.checkBox2);
@@ -417,7 +404,6 @@ namespace ConfigGenerator
         private CheckBox checkBox2;
         private Label label12;
         private Label label13;
-        private Label label14;
         private Label label15;
         private ListBox listBox1;
         private Button button2;

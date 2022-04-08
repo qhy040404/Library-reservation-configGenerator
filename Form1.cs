@@ -86,7 +86,7 @@ namespace ConfigGenerator
                     {
                         GenerateFile.WriteMailData(this.textBox3.Text, this.textBox4.Text);
                     }
-                    label14.Visible = true;
+                    MessageBox.Show("生成完毕", "提示");
                 }
                 else
                 {
