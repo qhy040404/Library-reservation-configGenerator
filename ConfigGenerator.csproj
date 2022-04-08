@@ -32,6 +32,7 @@
 
   <ItemGroup>
     <None Remove="icon\icon.ico" />
+    <None Remove="renovate.json" />
   </ItemGroup>
 
   <ItemGroup>
