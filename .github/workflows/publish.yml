@@ -164,6 +164,8 @@ jobs:
                 ;;
         esac
 
+        ls
+
     - name: Create zip file on Windows
       if: startsWith(matrix.os, 'windows-')
       shell: pwsh
