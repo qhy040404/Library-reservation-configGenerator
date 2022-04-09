@@ -120,8 +120,6 @@ jobs:
                 ;;
         esac
 
-        ls
-
     - name: Create zip file on macOS
       if: startsWith(matrix.os, 'macos-')
       shell: sh
@@ -166,10 +164,6 @@ jobs:
                 ;;
         esac
 
-        ls
-        cd out
-        ls
-
     - name: Create zip file on Windows
       if: startsWith(matrix.os, 'windows-')
       shell: pwsh
@@ -203,7 +197,7 @@ jobs:
       uses: actions/upload-artifact@v3.0.0
       with:
         name: Package-macos
-        path: out/ConfigGenerator-osx.zip
+        path: ConfigGenerator-osx.zip
 
     - name: Upload ConfigGenerator-win
       if: startsWith(matrix.os, 'windows-')
