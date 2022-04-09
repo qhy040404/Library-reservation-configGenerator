@@ -167,7 +167,7 @@ namespace ConfigGenerator
             DateTime dt = DateTime.Now;
             dt.AddDays(1);
             string day = dt.ToString("yyyy-MM-dd");
-            var startBoundary = day + "T06:30:02";
+            var startBoundary = day + "T06:30:05";
             var description = "Automatic reserve library.";
             _TASK_STATE state = SchTaskExt.CreateTaskScheduler(creator, taskName, path, CurrentPath, interval, startBoundary, description);
             if (state == _TASK_STATE.TASK_STATE_READY)
