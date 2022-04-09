@@ -120,6 +120,8 @@ jobs:
                 ;;
         esac
 
+        ls
+
     - name: Create zip file on macOS
       if: startsWith(matrix.os, 'macos-')
       shell: sh
@@ -164,6 +166,8 @@ jobs:
                 ;;
         esac
 
+        ls
+        cd out
         ls
 
     - name: Create zip file on Windows
