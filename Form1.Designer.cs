@@ -247,9 +247,9 @@ namespace ConfigGenerator
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(526, 100);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(176, 17);
+            this.label11.Size = new System.Drawing.Size(248, 17);
             this.label11.TabIndex = 20;
-            this.label11.Text = "（可输入多个，请以空格隔开）";
+            this.label11.Text = "（可输入多个，请以 - 隔开，例：123-125）";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // checkBox2
