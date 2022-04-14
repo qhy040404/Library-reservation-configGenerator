@@ -128,6 +128,7 @@ jobs:
       if: startsWith(matrix.os, 'macos-')
       shell: sh
       run: |
+        cp "Unix-version/res/com.qhy040404.library.plist" "out/"
         # By default use fastest compression
         seven_zip_args="-mx=1"
         zip_args="-1"
