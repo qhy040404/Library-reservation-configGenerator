@@ -62,7 +62,7 @@ jobs:
       if: startsWith(matrix.os, 'macos-')
       shell: sh
       run: |
-        g++-9 -o ConfigGenerator Unix-version/src/source.cpp
+        g++ -o ConfigGenerator Unix-version/src/source.cpp
         mkdir out
         cp "ConfigGenerator" "out/"
 
