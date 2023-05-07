@@ -40,7 +40,7 @@ jobs:
     - name: Verify g++ on macOS
       if: startsWith(matrix.os, 'macos-')
       shell: sh
-      run: g++-9 --version
+      run: g++ --version
 
     - name: Restore NuGet Packages
       if: startsWith(matrix.os, 'windows-')
