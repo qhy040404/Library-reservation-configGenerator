@@ -16,6 +16,7 @@ namespace ConfigGenerator
 
         private void area_comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (area_comboBox.SelectedIndex == -1) return;
             room_comboBox.Items.Clear();
             room_comboBox.Items.AddRange(Constants.libraries[area_comboBox.Text]);
         }
