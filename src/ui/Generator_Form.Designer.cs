@@ -210,6 +210,7 @@ namespace ConfigGenerator
             mail_link.TabStop=true;
             mail_link.Text="点此前往网页版邮箱";
             mail_link.Visible=false;
+            mail_link.LinkClicked+=mail_link_LinkClicked;
             // 
             // generate_button
             // 

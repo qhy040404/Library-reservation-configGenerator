@@ -1,5 +1,6 @@
 using ConfigGenerator.src.constants;
 using ConfigGenerator.src.utils;
+using System.Diagnostics;
 using TaskScheduler;
 
 namespace ConfigGenerator
@@ -152,5 +153,121 @@ namespace ConfigGenerator
                 MessageBox.Show("计划任务删除成功", "提示");
             }
         }
+
+        private void mail_link_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var mail = mail_user_textBox.Text;
+            if (mail == "")
+            {
+                MessageBox.Show("邮箱为空", "错误");
+                return;
+            }
+            else
+            {
+                if (!mail.Contains('@'))
+                {
+                    MessageBox.Show("邮箱格式错误", "错误");
+                    return;
+                }
+                else
+                {
+                    var mail_host = mail[(mail.IndexOf("@") + 1)..];
+                    if (mail_host == "qq.com")
+                    {
+                        Process.Start("https://mail.qq.com");
+                        return;
+                    }
+                    else if (mail_host == "163.com")
+                    {
+                        Process.Start("https://mail.163.com");
+                        return;
+                    }
+                    else if (mail_host == "126.com")
+                    {
+                        Process.Start("https://mail.126.com");
+                        return;
+                    }
+                    else if (mail_host == "sina.com")
+                    {
+                        Process.Start("https://mail.sina.com.cn");
+                        return;
+                    }
+                    else if (mail_host == "sohu.com")
+                    {
+                        Process.Start("https://mail.sohu.com");
+                        return;
+                    }
+                    else if (mail_host == "tom.com")
+                    {
+                        Process.Start("https://mail.tom.com");
+                        return;
+                    }
+                    else if (mail_host == "139.com")
+                    {
+                        Process.Start("https://mail.10086.cn");
+                        return;
+                    }
+                    else if (mail_host == "21cn.com")
+                    {
+                        Process.Start("https://mail.21cn.com");
+                        return;
+                    }
+                    else if (mail_host == "hotmail.com")
+                    {
+                        Process.Start("https://outlook.live.com");
+                        return;
+                    }
+                    else if (mail_host == "gmail.com")
+                    {
+                        Process.Start("https://mail.google.com");
+                        return;
+                    }
+                    else if (mail_host == "yahoo.com")
+                    {
+                        Process.Start("https://mail.yahoo.com");
+                        return;
+                    }
+                    else if (mail_host == "yahoo.com.cn")
+                    {
+                        Process.Start("https://mail.yahoo.com");
+                        return;
+                    }
+                    else if (mail_host == "yahoo.cn")
+                    {
+                        Process.Start("https://mail.yahoo.com");
+                        return;
+                    }
+                    else if (mail_host == "live.com")
+                    {
+                        Process.Start("https://outlook.live.com");
+                        return;
+                    }
+                    else if (mail_host == "live.cn")
+                    {
+                        Process.Start("https://outlook.live.com");
+                        return;
+                    }
+                    else if (mail_host == "live.com.cn")
+                    {
+                        Process.Start("https://outlook.live.com");
+                        return;
+                    }
+                    else if (mail_host == "outlook.com")
+                    {
+                        Process.Start("https://outlook.live.com");
+                        return;
+                    }
+                    else if (mail_host.StartsWith("mail."))
+                    {
+                        Process.Start("https://" + mail_host);
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("暂不支持该邮箱", "错误");
+                        return;
+                    }
+                }
+            }
+        }
     }
-}
