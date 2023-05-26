@@ -117,6 +117,7 @@ namespace ConfigGenerator
             // 
             // pass_textBox
             // 
+            pass_textBox.ImeMode=ImeMode.Disable;
             pass_textBox.Location=new Point(189, 151);
             pass_textBox.Name="pass_textBox";
             pass_textBox.Size=new Size(152, 23);
@@ -173,6 +174,7 @@ namespace ConfigGenerator
             // 
             // mail_pass_textBox
             // 
+            mail_pass_textBox.ImeMode=ImeMode.Disable;
             mail_pass_textBox.Location=new Point(189, 342);
             mail_pass_textBox.Name="mail_pass_textBox";
             mail_pass_textBox.Size=new Size(152, 23);
