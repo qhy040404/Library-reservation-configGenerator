@@ -187,7 +187,7 @@ jobs:
     - name: Upload ConfigGenerator-linux
       if: startsWith(matrix.os, 'ubuntu-')
       continue-on-error: true
-      uses: actions/upload-artifact@v3.1.2
+      uses: actions/upload-artifact@v3.1.3
       with:
         name: Package-ubuntu
         path: out/ConfigGenerator-linux.zip
@@ -195,7 +195,7 @@ jobs:
     - name: Upload ConfigGenerator-osx
       if: startsWith(matrix.os, 'macos-')
       continue-on-error: true
-      uses: actions/upload-artifact@v3.1.2
+      uses: actions/upload-artifact@v3.1.3
       with:
         name: Package-macos
         path: ConfigGenerator-osx.zip
@@ -203,7 +203,7 @@ jobs:
     - name: Upload ConfigGenerator-win
       if: startsWith(matrix.os, 'windows-')
       continue-on-error: true
-      uses: actions/upload-artifact@v3.1.2
+      uses: actions/upload-artifact@v3.1.3
       with:
         name: Package-windows
         path: out/ConfigGenerator-win.zip
@@ -248,7 +248,7 @@ jobs:
 
     - name: Upload SHA512SUMS
       continue-on-error: true
-      uses: actions/upload-artifact@v3.1.2
+      uses: actions/upload-artifact@v3.1.3
       with:
         name: SHA512SUMS
         path: upload/SHA512SUMS
